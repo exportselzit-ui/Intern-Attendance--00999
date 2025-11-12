@@ -355,9 +355,6 @@
                 <h2><i class="fas fa-user-check"></i> Mark Attendance</h2>
                 <p>Current time: <span class="time-display" id="currentTime">Loading...</span></p>
                 <div class="attendance-controls">
-                    <button id="autoMarkBtn" class="btn btn-primary">
-                        <i class="fas fa-robot"></i> Auto-mark at 9:00 AM
-                    </button>
                     <button id="manualMarkBtn" class="btn btn-success">
                         <i class="fas fa-fingerprint"></i> Mark Attendance Now
                     </button>
@@ -447,7 +444,6 @@
         const absentCountElement = document.getElementById('absentCount');
         const lateCountElement = document.getElementById('lateCount');
         const attendanceTableElement = document.getElementById('attendanceTable');
-        const autoMarkBtn = document.getElementById('autoMarkBtn');
         const manualMarkBtn = document.getElementById('manualMarkBtn');
         const leaveBtn = document.getElementById('leaveBtn');
         const attendanceModal = document.getElementById('attendanceModal');
@@ -578,10 +574,6 @@
         }
 
         // Event listeners
-        autoMarkBtn.addEventListener('click', () => {
-            alert('Auto-mark feature enabled. Attendance will be automatically marked at 9:00 AM for all present interns.');
-        });
-
         manualMarkBtn.addEventListener('click', manualMarkAttendance);
         leaveBtn.addEventListener('click', markLeave);
         cancelBtn.addEventListener('click', closeModal);
