@@ -302,6 +302,20 @@
             display: none;
         }
 
+        .google-form-section {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .google-form-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+
         @media (max-width: 768px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -382,8 +396,14 @@
             </table>
         </div>
 
-        <!-- Hidden Google Form for data storage -->
-        <iframe id="googleFormFrame" class="hidden-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLScnVRkt7OIm2A8SR_Ur6uNmNq-KBs2pkE_BTujNgzqwPlp14w/viewform?embedded=true"></iframe>
+        <!-- Google Form Section -->
+        <div class="google-form-section">
+            <h2>Submit Attendance via Google Form</h2>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScnVRkt7OIm2A8SR_Ur6uNmNq-KBs2pkE_BTujNgzqwPlp14w/viewform?embedded=true" 
+                    width="100%" height="955" frameborder="0" marginheight="0" marginwidth="0">
+                Loading…
+            </iframe>
+        </div>
 
         <footer>
             <p>Intern Attendance System &copy; 2023 | Designed for efficient intern management</p>
@@ -449,7 +469,6 @@
         const attendanceModal = document.getElementById('attendanceModal');
         const attendanceForm = document.getElementById('attendanceForm');
         const cancelBtn = document.getElementById('cancelBtn');
-        const googleFormFrame = document.getElementById('googleFormFrame');
 
         // Update date and time
         function updateDateTime() {
@@ -502,18 +521,6 @@
             });
         }
 
-        // Submit to Google Form (simulated)
-        function submitToGoogleForm(data) {
-            // In a real implementation, this would submit to Google Forms
-            // For demonstration, we'll just log the data
-            console.log("Submitting to Google Form:", data);
-            
-            // Simulate form submission
-            setTimeout(() => {
-                alert(`Attendance recorded for ${data.name} at ${data.time}`);
-            }, 500);
-        }
-
         // Manual mark attendance
         function manualMarkAttendance() {
             attendanceModal.style.display = 'flex';
@@ -543,20 +550,7 @@
             const now = new Date();
             const currentTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             
-            // Prepare data for Google Form
-            const formData = {
-                name: name,
-                email: email,
-                type: type,
-                time: currentTime,
-                date: now.toLocaleDateString(),
-                remarks: remarks
-            };
-            
-            // Submit to Google Form
-            submitToGoogleForm(formData);
-            
-            // Update UI (in a real app, this would come from the server)
+            // Update UI
             const newIntern = {
                 id: interns.length + 1,
                 name: name,
@@ -569,6 +563,8 @@
             interns.push(newIntern);
             renderAttendanceTable();
             updateStats();
+            
+            alert(`Attendance recorded for ${name} at ${currentTime}. Please also submit via the Google Form below for official records.`);
             
             closeModal();
         }
